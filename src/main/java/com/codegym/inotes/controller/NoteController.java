@@ -69,19 +69,19 @@ public class NoteController {
         }
     }
 
-//    @GetMapping("/delete/{id}")
-//    public ModelAndView getDeleteForm(@PathVariable Long id) {
-//        ModelAndView modelAndView = new ModelAndView("/note/delete");
-//        modelAndView.addObject("note", noteService.findById(id));
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/delete")
-//    public ModelAndView delete(@RequestParam Long id, RedirectAttributes redirectAttributes) {
-//        noteService.remove(id);
-//        ModelAndView modelAndView = new ModelAndView("redirect:/notes");
-//        return modelAndView;
-//    }
+    @GetMapping("/delete/{id}")
+    public ModelAndView getDeleteForm(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("/note/delete");
+        modelAndView.addObject("note", noteService.findById(id));
+        return modelAndView;
+    }
+
+    @PostMapping("/delete")
+    public ModelAndView delete(@RequestParam Long id, RedirectAttributes redirectAttributes) {
+        noteService.remove(id);
+        ModelAndView modelAndView = new ModelAndView("redirect:/notes");
+        return modelAndView;
+    }
 //
 //    @GetMapping("/edit/{id}")
 //    public ModelAndView showEditForm(@PathVariable Long id, Pageable pageable) {
