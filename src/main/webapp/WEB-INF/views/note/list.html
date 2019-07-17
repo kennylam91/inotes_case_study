@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+</head>
+<body>
+<div class="container">
+    <h3 class="page_title">Note List</h3>
+
+    <div class="option">
+        <div class="option_1">
+            <form th:action="@{/notes/create}">
+                <input class="input_submit" type="submit" value="New Note">
+            </form>
+        </div>
+        <div class="option_2">
+            <a th:href="@{'/notes'(page=${notes.number - 1},size=5)}" th:if="${notes.hasPrevious()}">
+                Previous </a>
+            &nbsp;<span th:text="${notes.number + 1}+' / '+${notes.totalPages}"></span>&nbsp;
+            <a th:href="@{'/notes'(page=${notes.number + 1},size=5)}" th:if="${notes.hasNext()}">Next </a>
+        </div>
+        <form class="search_form">
+            <h4>Search by Name:</h4>
+            <input class="input_text" type="text" name="nameSearch">
+            <input class="input_submit" type="submit" value="Search">
+        </form>
+
+    </div>
+    <form>
+        <table id="table">
+            <thead>
+            <tr>
+                <td>No</td>
+                <td><a th:href="@{/notes(sort='name')}">Name</a></td>
+                <td><a th:href="@{/notes(sort='age')}">Age</a></td>
+                <td><a th:href="@{/notes(sort='phone')}">Phone</a></td>
+                <td><a th:href="@{/notes(sort='address')}">Address</a></td>
+                <td><a th:href="@{/notes(sort='noteType')}">NoteType</a></td>
+                <td>Edit</td>
+                <td>Delete</td>
+                <td>View</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c:${notes}">
+                <td th:text="${cStat.count}"></td>
+                <td th:text="${c.name}"></td>
+                <td th:text="${c.age}"></td>
+                <td th:text="${c.phone}"></td>
+                <td th:text="${c.address}"></td>
+                <td><a th:href="@{/notes/(noteTypeId=${c.noteType.id})}" th:text="${c.noteType.name}"></a></td>
+                <td><a th:href="@{/notes/edit/__${c.id}__}">Edit</a></td>
+                <td><a th:href="@{/notes/delete/__${c.id}__}">Delete</a></td>
+                <td><a th:href="@{/notes/view/__${c.id}__}">View</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <footer th:replace="layout::footer"></footer>
+</div>
+</body>
+</html>

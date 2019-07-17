@@ -1,6 +1,10 @@
 package com.codegym.inotes;
 
 
+import com.codegym.inotes.service.NoteService;
+import com.codegym.inotes.service.NoteTypeService;
+import com.codegym.inotes.service.impl.NoteServiceImpl;
+import com.codegym.inotes.service.impl.NoteTypeServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -50,15 +54,15 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     }
 
 
-//    @Bean
-//    public ProductService productService(){
-//        return new ProductServiceImpl();
-//    }
-//
-//    @Bean
-//    public CategoryService categoryService(){
-//        return new CategoryServiceImpl();
-//    }
+    @Bean
+    public NoteService noteService(){
+        return new NoteServiceImpl();
+    }
+
+    @Bean
+    public NoteTypeService noteTypeService(){
+        return new NoteTypeServiceImpl();
+    }
 
     //Register formatter
 
