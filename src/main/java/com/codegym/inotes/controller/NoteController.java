@@ -107,13 +107,13 @@ public class NoteController {
 
     }
 
-//
-//    @GetMapping("/view/{id}")
-//    public ModelAndView getViewForm(@PathVariable("id") Long id) {
-//        ModelAndView modelAndView = new ModelAndView("/note/view");
-//        modelAndView.addObject("note", noteService.findById(id));
-//        return modelAndView;
-//    }
+
+    @GetMapping("/view/{id}")
+    public ModelAndView getViewForm(@PathVariable("id") Long id) {
+        ModelAndView modelAndView = new ModelAndView("/note/view");
+        modelAndView.addObject("note", noteService.findById(id));
+        return modelAndView;
+    }
 
 
 }

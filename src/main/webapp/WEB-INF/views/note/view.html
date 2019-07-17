@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head"></head>
 <body>
-view
+<div class="container">
+    <h3 class="page_title">Note Detail:</h3>
+    <h3><a th:href="@{/notes}">Note List</a></h3>
+    <form id="form" th:object="${note}">
+        <table>
+            <input type="hidden" th:value="${note.id}" th:field="*{id}">
+            <tr>
+                <td>Title</td>
+                <td><input class="input_text" readonly type="text" th:value="${note.title}"></td>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td><textarea class="input_text" readonly type="text" th:text="${note.content}"></textarea></td>
+            </tr>
+
+
+        </table>
+    </form>
+    <footer th:replace="layout::footer"></footer>
+</div>
 </body>
 </html>
