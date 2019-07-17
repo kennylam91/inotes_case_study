@@ -19,8 +19,8 @@
             <a th:href="@{'/notes'(page=${notes.number + 1},size=5)}" th:if="${notes.hasNext()}">Next </a>
         </div>
         <form class="search_form">
-            <h4>Search by Name:</h4>
-            <input class="input_text" type="text" name="nameSearch">
+            <h4>Search by title:</h4>
+            <input class="input_text" type="text" name="titleSearch">
             <input class="input_submit" type="submit" value="Search">
         </form>
 
@@ -30,10 +30,7 @@
             <thead>
             <tr>
                 <td>No</td>
-                <td><a th:href="@{/notes(sort='name')}">Name</a></td>
-                <td><a th:href="@{/notes(sort='age')}">Age</a></td>
-                <td><a th:href="@{/notes(sort='phone')}">Phone</a></td>
-                <td><a th:href="@{/notes(sort='address')}">Address</a></td>
+                <td><a th:href="@{/notes(sort='title')}">Title</a></td>
                 <td><a th:href="@{/notes(sort='noteType')}">NoteType</a></td>
                 <td>Edit</td>
                 <td>Delete</td>
@@ -41,16 +38,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="c:${notes}">
-                <td th:text="${cStat.count}"></td>
-                <td th:text="${c.name}"></td>
-                <td th:text="${c.age}"></td>
-                <td th:text="${c.phone}"></td>
-                <td th:text="${c.address}"></td>
-                <td><a th:href="@{/notes/(noteTypeId=${c.noteType.id})}" th:text="${c.noteType.name}"></a></td>
-                <td><a th:href="@{/notes/edit/__${c.id}__}">Edit</a></td>
-                <td><a th:href="@{/notes/delete/__${c.id}__}">Delete</a></td>
-                <td><a th:href="@{/notes/view/__${c.id}__}">View</a></td>
+            <tr th:each="each:${notes}">
+                <td th:text="${eachStat.count}"></td>
+                <td th:text="${each.title}"></td>
+                <td><a th:href="@{/notes/(noteTypeId=${each.noteType.id})}" th:text="${each.noteType.name}"></a></td>
+                <td><a th:href="@{/notes/edit/__${each.id}__}">Edit</a></td>
+                <td><a th:href="@{/notes/delete/__${each.id}__}">Delete</a></td>
+                <td><a th:href="@{/notes/view/__${each.id}__}">View</a></td>
             </tr>
             </tbody>
         </table>

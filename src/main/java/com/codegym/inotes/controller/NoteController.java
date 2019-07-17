@@ -20,7 +20,7 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/inotes")
+@RequestMapping("/notes")
 public class NoteController {
 
     @Autowired
@@ -29,23 +29,23 @@ public class NoteController {
     @Autowired
     private NoteTypeService noteTypeService;
 
-//    @GetMapping
-//    public ModelAndView list(@RequestParam("noteTypeId") Optional<Long> noteTypeId, @RequestParam("nameSearch") Optional<String> nameSearch,
-//                             @RequestParam("sort") Optional<String> sort, @PageableDefault(size = 5, page = 0, sort = "name") Pageable pageable) {
-//        Page<Note> notes;
-//        if (sort.isPresent()) pageable.getSort().getOrderFor(sort.get());
-//        if (nameSearch.isPresent()) {
-//            notes = noteService.findAllByNameContaining(nameSearch.get(), pageable);
-//        } else if (noteTypeId.isPresent()) {
-//            NoteType noteType = noteTypeService.findById(noteTypeId.get());
-//            notes = noteService.findAllByNoteType(noteType, pageable);
-//        } else {
-//            notes = noteService.findAll(pageable);
-//        }
-//        ModelAndView modelAndView = new ModelAndView("/note/list");
-//        modelAndView.addObject("notes", notes);
-//        return modelAndView;
-//    }
+    @GetMapping
+    public ModelAndView list(@RequestParam("noteTypeId") Optional<Long> noteTypeId, @RequestParam("titleSearch") Optional<String> titleSearch,
+                             @RequestParam("sort") Optional<String> sort, @PageableDefault(size = 5, page = 0, sort = "title") Pageable pageable) {
+        Page<Note> notes;
+        if (sort.isPresent()) pageable.getSort().getOrderFor(sort.get());
+        if (titleSearch.isPresent()) {
+            notes = noteService.findAllByTitleContaining(titleSearch.get(), pageable);
+        } else if (noteTypeId.isPresent()) {
+            NoteType noteType = noteTypeService.findById(noteTypeId.get());
+            notes = noteService.findAllByNoteType(noteType, pageable);
+        } else {
+            notes = noteService.findAll(pageable);
+        }
+        ModelAndView modelAndView = new ModelAndView("/note/list");
+        modelAndView.addObject("notes", notes);
+        return modelAndView;
+    }
 
     @GetMapping("/create")
     public ModelAndView getCreateForm(Pageable pageable) {
