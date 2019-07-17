@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head"></head>
 <body>
-edit
+<div class="container">
+    <h3 class="page_title">Edit Note:</h3>
+    <h3><a th:href="@{/notes}">Note List</a></h3>
+    <form id="form" th:object="${note}" th:action="@{/notes/update}" method="post">
+        <table>
+            <input type="hidden" th:value="${note.id}" th:field="*{id}">
+            <tr>
+                <td>Title</td>
+                <td><input class="input_text" type="text" th:value="${note.title}" th:field="*{title}"></td>
+                <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></td>
+
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td><textarea class="input_text" type="text" th:value="${note.content}" th:field="*{content}"></textarea></td>
+                <td th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></td>
+
+            </tr>
+
+            <tr>
+                <td>NoteType</td>
+                <td>
+                    <select class="input_text" th:name="noteType">
+                        <option th:each="each:${noteTypes}"
+                                th:text="${each.name}"
+                                th:value="${each.id}"
+                                th:selected="(${each.id}==*{noteType.id})"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input class="input_submit" type="submit" value="Save"></td>
+            </tr>
+        </table>
+    </form>
+    <footer th:replace="layout::footer"></footer>
+</div>
 </body>
 </html>

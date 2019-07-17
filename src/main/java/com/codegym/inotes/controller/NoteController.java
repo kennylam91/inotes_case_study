@@ -82,31 +82,31 @@ public class NoteController {
         ModelAndView modelAndView = new ModelAndView("redirect:/notes");
         return modelAndView;
     }
-//
-//    @GetMapping("/edit/{id}")
-//    public ModelAndView showEditForm(@PathVariable Long id, Pageable pageable) {
-//        ModelAndView modelAndView = new ModelAndView("/note/edit");
-//        Note note = noteService.findById(id);
-//        modelAndView.addObject("note", note);
-//        modelAndView.addObject("noteTypes", noteTypeService.findAll(pageable));
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/update")
-//    public ModelAndView update(@Validated @ModelAttribute("note") Note note, BindingResult bindingResult,
-//                               RedirectAttributes redirectAttributes, Pageable pageable) {
-//        if (bindingResult.hasFieldErrors()) {
-//            ModelAndView modelAndView = new ModelAndView("/note/edit");
-//            modelAndView.addObject("noteTypes", noteTypeService.findAll(pageable));
-//            return modelAndView;
-//        } else {
-//            noteService.save(note);
-//            ModelAndView modelAndView = new ModelAndView("redirect:/notes");
-//            return modelAndView;
-//        }
-//
-//    }
-//
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView showEditForm(@PathVariable Long id, Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("/note/edit");
+        Note note = noteService.findById(id);
+        modelAndView.addObject("note", note);
+        modelAndView.addObject("noteTypes", noteTypeService.findAll(pageable));
+        return modelAndView;
+    }
+
+    @PostMapping("/update")
+    public ModelAndView update(@Validated @ModelAttribute("note") Note note, BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes, Pageable pageable) {
+        if (bindingResult.hasFieldErrors()) {
+            ModelAndView modelAndView = new ModelAndView("/note/edit");
+            modelAndView.addObject("noteTypes", noteTypeService.findAll(pageable));
+            return modelAndView;
+        } else {
+            noteService.save(note);
+            ModelAndView modelAndView = new ModelAndView("redirect:/notes");
+            return modelAndView;
+        }
+
+    }
+
 //
 //    @GetMapping("/view/{id}")
 //    public ModelAndView getViewForm(@PathVariable("id") Long id) {
